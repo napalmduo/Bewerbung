@@ -1,0 +1,49 @@
+<div class="jumbotron">
+  <h1 class="text-center">Liste aller Projekte</h1>
+</div>
+<div class="jumbotron">
+  <h2>Export</h2>
+    <%= select_tag("filter", options_for_select(@dropdown_options), class: "form-control") %><br/>
+    <a id="filter_link" href="/projects.xml" target="_blank" class="btn btn-lg btn-primary">
+        Export Texte von gewählten Projekt
+    </a>
+</div>
+<div class="jumbotron">
+  <h2>Übersicht aller Projekte (<%= link_to 'Neues&nbsp;Projekt&nbsp;anlegen'.html_safe, new_project_path %>)</h2>
+      <% @project.each do |project| %>
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <p style="margin-bottom: 0px;">
+              <%= project.Name %>&nbsp;&nbsp;
+              <a class="btn btn-xs btn-info" href="javascript:void(1);"
+                 onclick="$(this).parents('.panel').find('.panel-body').slideToggle();">Mehr Infos</a>
+              <%= link_to 'Details', project_path(project), class: "btn btn-xs btn-info" %>
+              <%= link_to 'Bearbeiten', edit_project_path(project), class: "btn btn-xs btn-warning" %>
+              <%= link_to 'Löschen', project_path(project),
+                          method: :delete, data: {confirm: 'Sind Sie sicher?'},
+                          class: "btn btn-xs btn-danger" %>
+            </p>
+          </div>
+          <div class="panel-body" style="display: none;">
+            <% project.texts.each do |text| %>
+                <p>
+                    <strong><%= text.titel %>:</strong> <%= text.text %><br/>
+                </p>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#filter').on('change', function(){
+            var filter = $(this).val();
+            if (filter != 0) {
+                $('#filter_link').attr('href', '/projects.xml?filter=' + filter);
+            } else {
+                $('#filter_link').attr('href', '/projects.xml');
+            }
+
+        });
+    });
+</script>

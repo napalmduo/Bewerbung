@@ -1,0 +1,14 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <p>
+      <%= text.titel %>
+      <%= link_to 'Text bearbeiten', edit_project_text_path(@project, text), class: "btn btn-xs btn-warning" %>
+      <%= link_to 'Text löschen',  [text.project, text],
+                                    method: :delete, data: {confirm: "Sind Sie sicher?"} ,
+                                    class: "btn btn-xs btn-danger" %>
+    </p>
+  </div>
+  <div class="panel-body">
+    <%= text.text %>
+  </div>
+</div>

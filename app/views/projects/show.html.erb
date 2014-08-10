@@ -1,0 +1,15 @@
+<div class="jumbotron">
+    <h1>
+      <%= @project.Name %> <a class="btn btn-lg btn-primary" href="#add_text">Neuer&nbsp;Text</a>
+    </h1>
+    <h2>Texte:</h2>
+
+    <%= render @project.texts %>
+    <div id="add_text">
+        <h2>Text hinzufügen:</h2>
+        <%= render "texts/form" %>
+    </div>
+    <br/><br/>
+    <%= link_to 'Zurück', projects_path, class: "btn btn-lg btn-default" %>
+    <%= link_to 'Bearbeiten', edit_project_path(@project), class: "btn btn-lg btn-primary" %>
+</div>
